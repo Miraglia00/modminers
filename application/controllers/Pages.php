@@ -19,20 +19,20 @@
 
 
                 if ($page === 'home') {
-                    $data['post'] = $this->site_model->getAll('post', 'edited_at DESC, created_at DESC');
-                    if($data['post'] != "A tábla üres.") {
-                        $c = count($data['post']);
+                    $data['posts'] = $this->site_model->getAll('post', 'edited_at DESC, created_at DESC');
+                    if($data['posts'] != false) {
+                        $c = count($data['posts']);
                         $x = 0;
-                        while ($c - 1 >= $x) {
-                            $id = $data['post'][$x]['user_id'];
+                        while ($c > $x) {
+                            $id = $data['posts'][$x]['user_id'];
 
-                            if ($data['post'][$x]['last_edited_by'] != 0) {
+                            if ($data['posts'][$x]['last_edited_by'] != 0) {
 
-                                $le = $data['post'][$x]['last_edited_by'];
+                                $le = $data['posts'][$x]['last_edited_by'];
 
                                 $user_data = $this->user_model->custom("SELECT username FROM users WHERE id='$le'");
 
-                                $data['post'][$x]['last_edited_username'] = $user_data[0]['username'];
+                                $data['posts'][$x]['last_edited_username'] = $user_data[0]['username'];
                             }
 
                             $user_data = $this->user_model->custom("SELECT image_url,username FROM users WHERE id='$id'");

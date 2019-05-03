@@ -23,7 +23,7 @@
 
 				return $data;
 			}else{
-				return "A tábla üres.";
+				return false;
 			}
 		}
 
