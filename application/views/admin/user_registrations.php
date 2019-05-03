@@ -3,9 +3,11 @@
 		<table class="table text-center" style="font-size:16px;">
 			<thead>
 				<tr>
-                    <th class="align-middle" scope="col">Felhasználónév</th>
+                    <th class="align-middle d-none d-md-table-cell" scope="col">Felhasználónév</th>
+                    <th class="align-middle d-xs-table-cell d-md-none" scope="col">F.név</th>
 					<th class="align-middle" scope="col">Állapot</th>
-					<th class="align-middle" scope="col">Bemutatkozás</th>
+					<th class="align-middle d-none d-md-table-cell" scope="col">Bemutatkozás</th>
+                    <th class="align-middle d-xs-table-cell d-md-none" scope="col">#</th>
 					<th class="align-middle d-none d-sm-table-cell" scope="col">Dátum</th>
 			    </tr>
 			</thead>
