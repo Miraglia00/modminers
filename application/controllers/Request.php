@@ -16,6 +16,15 @@
             }
         }
 
+        public function get_info($id) {
+            /*if($this->input->post('data') == true) {*/
+                $this->load->model('user_model');
+                $res = $this->user_model->custom("SELECT * FROM user_registrations WHERE id='$id'");
+                $res['0']['username'] = $this->user_model->get_username($id);
+                echo json_encode($res['0']);
+            /*}*/
+        }
+
         /*public function set_id() {
             if($this->input->post('data') != NULL) {
                 $this->session->set_userdata('reg_id', $this->input->post('data'));
