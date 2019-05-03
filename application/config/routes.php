@@ -73,3 +73,4 @@ $route['translate_uri_dashes'] = FALSE;
 $route['request/registration/intro/(:any)'] = "request/show_intro/$1";
 $route['request/registration/intro/username/(:any)'] = "request/get_username/$1";
 $route['request/registration/set_id'] = "request/set_id";
+$route['request/registration/info/(:any)'] = "request/get_info/$1";
