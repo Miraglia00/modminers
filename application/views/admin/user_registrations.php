@@ -48,6 +48,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="m-1 result"></div>
+                    <div>Regisztráció dátuma: <span class="reg_date"></span></div>
 				</div>
 				<div class="modal-footer">
 				<?php if($user['reg_status'] == 0): ?>
