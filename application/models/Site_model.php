@@ -28,20 +28,42 @@
 		}
 
 		function select($table, $array) {
-			$this->db->select($array);			
-			$q = $this->db->get($table);
+			$q = $this->db->get_where($table,$array);
 
 			if($q->num_rows() > 0) {
 
-				foreach ($q->result() as $row) {
-					$data[] = $row;
+				foreach ($q->result_array() as $row) {
+					$data = $row;
 				}
 
 				return $data;
 			}else{
-				return "A tábla üres.";
+				return false;
 			}
 		}
+        function update($table, $id, $array) {
+            $this->db->set($array);
+            $this->db->where('id', $id);
+            $q =  $this->db->update($table);
+
+                if($q) {
+                    return true;
+                }else{
+                    return false;
+                }
+        }
+
+        function delete($table, $id) {
+            $this->db->where('id', $id);
+            $q = $this->db->delete($table);
+
+            if($q) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
 
         function insert($table, $array) {
             $query = $this->db->insert($table, $array);
