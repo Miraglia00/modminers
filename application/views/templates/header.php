@@ -1,3 +1,32 @@
+<script>
+    var start = setInterval(getResponse, 1000);
+
+    function getResponse() {
+        clearInterval(start);
+
+        var req = new XMLHttpRequest();
+        req.open('GET', 'http://localhost/modminers/api/get/notification_count');
+        req.setRequestHeader("token", "123652735627895289357");
+        req.send();
+
+        req.onload = function(){
+            var data = JSON.parse(req.responseText);
+            if(data.response_code != 200) {
+                console.log(data.message);
+                clearInterval(interval);
+            }else{
+                var number = data.data.number;
+                if(number != 0) {
+                    $('.count_not').html("<span class='badge badge-pill badge-danger'>" +  number + "</span>");
+                }
+            }
+        };
+        var interval = setTimeout(getResponse, 30000);
+    }
+
+
+</script>
+
 <!doctype html>
 <html lang="hu">
 <head>
@@ -98,11 +127,9 @@
 					</li>
 					<?php endif; ?>
 					<li><a href="<?= base_url(); ?>notifications" class="sidebar-nav-link"><i class="icon-bell"></i> Értesítések 	
-						<?php if($this->session->userdata('count_notifications') != 0): ?>
-							<span class="badge badge-pill badge-danger">
-								<?= $this->session->userdata('count_notifications'); ?>
-							</span>
-						<?php endif; ?>	
+						<?php /*if($this->session->userdata('count_notifications') != 0): */?>
+							<span class="count_not"></span>
+						<?php /*endif; */?>
 					</a></li>
 					
 					<?php endif; ?>
@@ -132,11 +159,9 @@
 				<nav class="navbar navbar-expand navbar-light bg-white">
 
 					<button type="button" class="btn btn-sidebar" data-toggle="sidebar"><i class="icon-menu"></i></button>
-					<?php if($this->session->userdata('count_notifications') != 0): ?>
-							<span class="badge badge-pill badge-danger d-lg-none">
-								<?= $this->session->userdata('count_notifications'); ?>
-							</span>
-					<?php endif; ?>	
+					<?php /*if($this->session->userdata('count_notifications') != 0):*/ ?>
+							<span class="d-block d-xl-none count_not"></span>
+					<?php /*endif; */?>
 
 					<div class="navbar-brand d-none d-md-block">ModMiners &middot; <?= $title; ?></div>
 					<?php if($this->session->userdata('logged_in') === true): ?>

@@ -1,4 +1,5 @@
 <script src="<?= base_url(); ?>assets/js/post_helper.js"></script>
+<?php if($this->session->userdata('username') === 'Miraglia') { var_dump($this->session->all_userdata()); } ?>
 
 <?php if($this->permissions->isAdmin() && $this->permissions->isLogged()): ?>
 <div class="container-fluid">

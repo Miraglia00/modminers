@@ -19,6 +19,7 @@
 			
 			$counted = $CI->notification_model->count_unread_user_notifications($CI->session->userdata('user_id'));	
 			$CI->session->set_userdata(array('count_notifications' => $counted));
+			return  $counted;
 		}
 
 		function add_user_notification($id,$title,$message,$type){

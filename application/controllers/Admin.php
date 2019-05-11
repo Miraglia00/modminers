@@ -558,28 +558,5 @@ class Admin extends CI_Controller {
 
     }
 
-
-	public function apitest() {
-        require 'vendor/autoload.php';
-        $client = new GuzzleHttp\Client();
-        $res = $client->request('POST', 'http://localhost/modminers_ci3/api/post', [
-            'headers' => [
-                'token' => 'asgaghsdhsdh'
-            ],
-            'form_params' => [
-                'token' => '1241235236346'
-            ]
-        ]);
-        echo $res->getBody();
-        $array = json_decode($res->getBody(), true);
-        echo $array['response_code'];
-        echo $array['message'];
-    }
-
-    public function set_sign() {
-        $this->auth->set_sign($this->session->userdata('user_id'), $this->session->userdata('generated'));
-    }
-
-	
 }
 ?>
