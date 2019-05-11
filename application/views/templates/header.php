@@ -5,7 +5,7 @@
         clearInterval(start);
 
         var req = new XMLHttpRequest();
-        req.open('GET', 'http://localhost/modminers/api/get/notification_count');
+        req.open('GET', '<?= $this->auth->siteURL(); ?>/api/get/notification_count');
         req.setRequestHeader("token", "123652735627895289357");
         req.send();
 
