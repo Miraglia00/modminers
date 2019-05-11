@@ -7,10 +7,11 @@ class Auth
         $that=& get_instance();
     }
 
-    public function set_sign($user_id, $generated) {
+    public function set_sign($generated) {
         $that=& get_instance();
-        $user_code = $that->site_model->select('users', array(user_id => $user_id));
-        echo $user_code['code'];
+        $data = $that->site_model->select('users', array('id' => $that->session->userdata('user_id')));
+        $user_code = $data['code'];
+        $token = hash('sha256', $user_code.$generated);
     }
 
 }

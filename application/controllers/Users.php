@@ -154,6 +154,9 @@
 
 						$this->session->set_userdata($user_data);
 
+                        $signature = $this->auth->set_sing($this->session->userdata('generated'));
+                        $this->site_model->insert('api_tokens', array('token' => $signature, 'ip' => $this->input->ip_address()));
+
 						$this->popup->set_popup('success', 'Sikeres belépés', 'Üdvözöllek '.$this->input->post('username').'!');
 
 						redirect('');

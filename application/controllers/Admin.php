@@ -439,6 +439,10 @@ class Admin extends CI_Controller {
 
 	public function create_post() {
 
+        if(!$this->permissions->isAdmin()) {
+            redirect('');
+        }
+
 		$this->form_validation->set_rules('post_title', 'cím', 'required');
 		$this->form_validation->set_rules('post_content', 'tartalom', 'required');
 
@@ -478,28 +482,81 @@ class Admin extends CI_Controller {
 
 		$this->load->view('templates/footer');
 	}
+    public function edit_post($id) {
 
-	public function apitest() {
-        require 'vendor/autoload.php';
-        $client = new GuzzleHttp\Client();
-        $res = $client->request('POST', 'http://localhost/modminers_ci3/api/post', [
-            'headers' => [
-                'token' => 'asgaghsdhsdh'
-            ],
-            'form_params' => [
-                'token' => '1241235236346'
-            ]
-        ]);
-        echo $res->getBody();
-        $array = json_decode($res->getBody(), true);
-        echo $array['response_code'];
-        echo $array['message'];
+        if(!$this->permissions->isAdmin()) {
+            redirect('');
+        }
+
+        if($id == NULL || !is_numeric($id)) {
+            redirect('');
+        }
+
+        $this->form_validation->set_rules('post_title', 'cím', 'required');
+        $this->form_validation->set_rules('post_content', 'tartalom', 'required');
+
+        if($this->form_validation->run() === TRUE) {
+            $content = $this->input->post('post_content');
+            $title = $this->input->post('post_title');
+
+            $rtime = $this->site_model->get_time();
+
+            $query = $this->site_model->update('post', $id, array(
+                'title' => $title,
+                'content' => $content,
+                'edited_at' => $rtime,
+                'last_edited_by' => $this->session->userdata('user_id')
+            ));
+
+            if($query) {
+                $this->notifications->add_admin_notification('Egy hír szerkesztve lett!',"<b>".$this->session->userdata('username')."</b> szerkesztett egy hírt a kezdőlapon! (Cím: ".$title.")", 4);
+                $this->popup->set_popup('success', 'Sikeres mentés!', 'A hír szerkesztve lett!');
+                redirect('home');
+            }else{
+                redirect('home');
+            }
+
+
+        }
+
+        $data['post'] = $this->site_model->select('post', array('id' => $id));
+
+        $header["title"] = "Adminpanel - Hír szerkesztése";
+
+        $header['permissions'] = $this->permissions->get_permissions();
+
+        $this->load->view('templates/header', $header);
+
+        $this->load->view('admin/edit_post',$data);
+
+        $this->load->view('templates/footer');
     }
 
-    public function set_sign() {
-        $this->auth->set_sign($this->session->userdata('user_id'), $this->session->userdata('generated'));
+    public function delete_post($id) {
+        if(!$this->permissions->isAdmin()) {
+            redirect('');
+        }
+
+        if($id == NULL || !is_numeric($id)) {
+            redirect('');
+        }
+
+        $post = $this->site_model->select('post', array('id' => $id));
+        $title = $post['title'];
+
+        $q = $this->site_model->delete('post', $id);
+
+        if($q) {
+            $this->notifications->add_admin_notification('Egy hír törölve lett!',"<b>".$this->session->userdata('username')."</b> törölt egy hírt a kezdőlapról! (Cím: ".$title.")", 4);
+            $this->popup->set_popup('success', 'Sikeres törlés!', 'A hír törölve lett!');
+            redirect('home');
+        }else{
+            $this->popup->set_popup('form_errors', 'Sikertelen törlés!', 'Váratlan hiba történt!');
+            redirect('home');
+        }
+
+
     }
 
-	
 }
 ?>

@@ -65,6 +65,8 @@ $route['adminpanel/beta_accounts/(:any)'] = 'admin/beta_acc/$1';
 $route['adminpanel/create_beta'] = 'admin/create_beta';
 $route['adminpanel/registrations'] = 'admin/user_registrations';
 $route['adminpanel/post/create'] = 'admin/create_post';
+$route['adminpanel/post/edit/(:any)'] = 'admin/edit_post/$1';
+$route['adminpanel/post/delete/(:any)'] = 'admin/delete_post/$1';
 
 $route['default_controller'] = 'pages/view';
 $route['(:any)'] = "pages/view/$1";
