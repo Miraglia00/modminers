@@ -8,9 +8,9 @@
 						<div class="col-12 col-md-5 d-inline-flex justify-content-center align-items-center">
 							<?php $image_url = ($user_data['image_url'] === "default" ? base_url()."assets/images/default_img.png" : $user_data['image_url']); ?>
 							<?php if($user_settings['image'] == 1): ?>
-							    <img class="rounded-circle d-flex justify-content-center" style="width:300px !important; height:300px !important;" src="<?= $image_url ?>" />
+							    <img class="rounded-circle d-flex justify-content-center" style="width:35vw !important; height:35vw !important;" src="<?= $image_url ?>" />
 							<?php else: ?>
-								<img class="rounded-circle d-flex justify-content-center"  style="width:300px !important; height:300px !important;" src="<?= $image_url ?>" />
+								<img class="rounded-circle d-flex justify-content-center"  style="width:35vw !important; height:35vw !important;" src="<?= $image_url ?>" />
 							<?php endif; ?>
 						</div>
 						<div class="col-12 col-md-7">
