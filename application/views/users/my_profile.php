@@ -5,12 +5,12 @@
 			<div class="jumbotron bg-light">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-12 col-md-5 d-flex">
+						<div class="col-12 col-md-5 d-inline-flex justify-content-center align-items-center">
 							<?php $image_url = ($user_data['image_url'] === "default" ? base_url()."assets/images/default_img.png" : $user_data['image_url']); ?>
 							<?php if($user_settings['image'] == 1): ?>
-							<img class="img-fluid mx-auto my-auto" src="<?= $image_url ?>" />
+							    <img class="rounded-circle d-flex justify-content-center" style="width:300px !important; height:300px !important;" src="<?= $image_url ?>" />
 							<?php else: ?>
-								<img class="img-fluid mx-auto my-auto" src="<?= $image_url ?>" />
+								<img class="rounded-circle d-flex justify-content-center"  style="width:300px !important; height:300px !important;" src="<?= $image_url ?>" />
 							<?php endif; ?>
 						</div>
 						<div class="col-12 col-md-7">
@@ -20,8 +20,10 @@
 							<?php if($user_settings['image'] == 0): ?>
 							<p class="small m-0 danger" style="color:red;">A profilképed nem nyilvános, de itt megjelenítjük neked!</p>
 							<?php endif; ?>
-
-								<table class="table">
+                            <!--
+                                TABLET - GÉP ADATOK MUTATÁSA
+                            -->
+                            <table class="table d-none d-md-table">
 								<tbody>
 								<tr>
 									<?php $age = ($user_data['b_date'] === "0000-00-00" ? "Ismeretlen" : $user_data['age']); ?>
@@ -40,6 +42,29 @@
 								</tr>
 								</tbody>
 							</table>
+                            <!--
+                                TELEFON ADATOK MUTATÁSA
+                            -->
+                            <table class="table table-responsive d-table d-md-none">
+                                <tbody>
+                                <tr>
+                                    <?php $age = ($user_data['b_date'] === "0000-00-00" ? "Ismeretlen" : $user_data['age']); ?>
+                                    <td class="col-3 text-center" style="font-size: 35px;"><i class="fas fa-pager"></i></td>
+                                    <td class="col-8 text-center align-middle" style="font-size: 16px;"><?= $age ?></td>
+                                </tr>
+                                <tr style="border-spacing: 0px !important;">
+                                    <td class="col-3 text-center" style="font-size: 35px;"><i class="fas fa-at"></i></td>
+                                    <?php if($user_settings['email'] === "1"): ?>
+                                    <td class="align-middle text-center col-3 text-center" style="font-size: 16px;"><?= $user_data['email'] ?><br /></td><br />
+                                    <?php else: ?>
+                                    <td class="align-middle text-center col-3 text-center" style="font-size: 16px;"><?= $user_data['email'] ?><br /><p class="danger small mb-0" style="color:red;">Nem publikus email!</p></td>
+                                    <?php endif; ?>
+                                </tr>
+                                <tr>
+                                    <td class="border align-middle bg-secondary" style="font-size: 16px;">Regisztráció időpontja:</td><td class="border align-middle bg-secondary" style="font-size: 16px;"><?= $user_data['reg_date'] ?></td>
+                                </tr>
+                                </tbody>
+                            </table>
 
 							<table class="w-100" style="text-align:center;">
 								<tr>
