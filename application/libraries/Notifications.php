@@ -5,9 +5,9 @@
 			$CI=& get_instance();
 			$CI->load->model("notification_model");
 
-			if($CI->session->userdata('logged_in') === TRUE) {
+			/*if($CI->session->userdata('logged_in') === TRUE) {
 				$this->count_unread_user_notifications();
-			}
+			}*/
 
 		}
 

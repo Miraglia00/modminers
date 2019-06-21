@@ -56,6 +56,7 @@ $route['user/browser_logout'] = 'users/browser_logout';
 $route['notifications'] = 'users/notifications';
 $route['notifications/(:any)'] = 'users/notifications/$1';
 $route['login'] = 'users/login';
+$route['changelog'] = 'users/changelog';
 
 $route['adminpanel/edit/(:any)/(:any)'] = "admin/edit/$1/$2";
 $route['adminpanel/update/(:any)/(:any)'] = "admin/update/$1/$2";
@@ -67,6 +68,7 @@ $route['adminpanel/registrations'] = 'admin/user_registrations';
 $route['adminpanel/post/create'] = 'admin/create_post';
 $route['adminpanel/post/edit/(:any)'] = 'admin/edit_post/$1';
 $route['adminpanel/post/delete/(:any)'] = 'admin/delete_post/$1';
+$route['adminpanel/add_changelog'] = 'admin/add_changelog';
 
 $route['default_controller'] = 'pages/view';
 $route['(:any)'] = "pages/view/$1";

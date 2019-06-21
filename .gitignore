@@ -8,7 +8,8 @@ application/logs/*
 
 !application/*/.htaccess
 !.htaccess
-!application/config/config.php
+application/config/*
+
 
 composer.lock
 
@@ -31,3 +32,5 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-project
 /tests/tests/
 /tests/results/
+
+application/config/

@@ -70,6 +70,11 @@
             return $query;
         }
 
+        function insert_multiple($table, $array) {
+            $query = $this->db->insert_batch($table, $array);
+            return $query;
+        }
+
         function get_time() {
             $datestring = '%Y-%m-%d %H:%i';
             $time = time();

@@ -331,20 +331,6 @@ class Admin extends CI_Controller {
 			$this->load->view('templates/footer');
 
 		}
-
-		$data['beta_acc'] = $this->user_model->get_user_data($id);
-
-		$header["title"] = "Adminpanel - ".$data['beta_acc']['username'];
-
-		$header['permissions'] = $this->permissions->get_permissions();
-
-		$header['user_notifications'] = $this->notifications->get_user_notifications($this->session->userdata('user_id'));
-
-		$this->load->view('templates/header', $header);
-
-		$this->load->view('admin/edit_beta_acc', $data);
-
-		$this->load->view('templates/footer');
 	}
 
 	public function create_beta() {
@@ -556,6 +542,50 @@ class Admin extends CI_Controller {
         }
 
 
+    }
+
+    public function add_changelog() {
+        if(!$this->permissions->isAdmin() || !$this->permissions->isLogged()) {
+            redirect('');
+        }
+
+        $this->form_validation->set_rules('type1', 'tipus', 'trim');
+        $this->form_validation->set_rules('content1', 'tartalom', 'trim');
+        if($this->form_validation->run() === TRUE) {
+            $changes = array();
+            for($i = 1; $i<20; $i++) {
+                if($this->input->post('type'.$i) != NULL && $this->input->post('content'.$i) != NULL) {
+                    $changes[] = array('type' => $this->input->post('type'.$i), 'content' =>  $this->input->post('content'.$i), 'c_date' => date('Y-m-d'));
+                }
+            }
+
+            //Default fields must be filled!
+            if($changes[0]['type'] == NULL || $changes[0]['content'] == NULL) {
+                $this->popup->set_popup('form_errors', 'Sikertelen mentés!', 'Az alapértelmezett mező nem lehet üres!');
+                redirect('admin/add_changelog');
+            }
+
+            if($this->site_model->insert_multiple('changelog', $changes)) {
+                $this->popup->set_popup('success', 'Sikeres mentés!', 'A changelog elemek hozzáadva a listához!');
+                $this->notifications->add_admin_notification("Új changelog elemek!","<b>".$this->session->userdata('username')."</b> hozzáadott ".count($changes)." darab változtatást! <a style=\"color:black;\" href='".base_url()."changelog'> Menjünk oda! <i style=\"font-size:20px\" class=\"fas fa-long-arrow-alt-right\"></i></a>" , 4);
+                $this->notifications->add_user_notification('all', 'Új changelog elemek!',"<b>".$this->session->userdata('username')."</b> hozzáadott ".count($changes)." darab változtatást! <a style=\"color:black;\" href='".base_url()."changelog'> Menjünk oda! <i style=\"font-size:20px\" class=\"fas fa-long-arrow-alt-right\"></i></a>", 0);
+                redirect('admin/add_changelog');
+            }else{
+                $this->popup->set_popup('form_errors', 'Sikertelen mentés!', 'Váratlan hiba történt! (SQL)');
+                redirect('admin/add_changelog');
+            }
+
+        }
+
+        $data['user_notifications'] =  $this->notification_model->get_all_user_notifications($this->session->userdata('user_id'));
+        $header['permissions'] = $this->permissions->get_permissions();
+        $header["title"] = "Changelog";
+
+        $this->load->view('templates/header',$header);
+
+        $this->load->view('admin/add_changelog', $data);
+
+        $this->load->view('templates/footer');
     }
 
 }

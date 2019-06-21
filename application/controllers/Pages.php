@@ -32,13 +32,16 @@
 
                                 $user_data = $this->user_model->custom("SELECT username FROM users WHERE id='$le'");
 
+
                                 $data['posts'][$x]['last_edited_username'] = $user_data[0]['username'];
                             }
 
                             $user_data = $this->user_model->custom("SELECT image_url,username FROM users WHERE id='$id'");
+                            $user_settings = $this->user_model->custom("SELECT image FROM user_settings WHERE id='$id'");
 
                             $data['posts'][$x]['image_url'] = $user_data[0]['image_url'];
                             $data['posts'][$x]['username'] = $user_data[0]['username'];
+                            $data['posts'][$x]['image'] = $user_settings[0]['image'];
 
                             $x++;
                         }

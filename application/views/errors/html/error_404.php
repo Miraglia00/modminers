@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$homepage = "www.modminers.hu";
+$homepage = "http://www.modminers.hu";
 
 ?><!DOCTYPE html>
 <html lang="en">
