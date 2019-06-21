@@ -17,7 +17,7 @@
             }else{
                 var number = data.data.number;
                 if(number != 0) {
-                    $('.count_not').html("<span class='badge badge-pill badge-danger'>" +  number + "</span>");
+                    $('.count_not').html("&nbsp;<span class='badge badge-pill badge-danger'>" +  number + "</span>");
                 }
             }
         };
@@ -51,6 +51,9 @@
 	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
+    <!-- CUSTOM LAODING -->
+    <script src="<?= base_url(); ?>/assets/js/loading.js"></script>
+
 	<!-- custom css -->
 	<link href="<?= base_url(); ?>/assets/css/custom.css" rel="stylesheet">
 	<!-- FONTAWESOME -->
@@ -72,6 +75,12 @@
 	  	</div>
 	<?php endif; ?>
 	<div class="app">
+
+        <!-- LOADING ICON -->
+        <div class="fixed-top d-flex justify-content-end m-1">
+            <i style="font-size:50px;" class="fas fa-circle-notch fa-spin hidden loading"></i>
+        </div>
+
 		<div class="app-body">
 			<div class="app-sidebar bg-primary">
 				<div class="text-right">
@@ -118,7 +127,7 @@
 							<li><a href="<?= base_url(); ?>adminpanel/show/all" class="sidebar-nav-link">Játékosok listája</a></li>
 							<li><a href="<?= base_url(); ?>adminpanel/registrations" class="sidebar-nav-link">Játékos regisztrációk</a></li>
 							<li><a href="<?= base_url(); ?>adminpanel/beta_accounts/all" class="sidebar-nav-link">Beta felhasználók</a></li>
-							<li><a href="../../pages/input-controls/input-group.html" class="sidebar-nav-link">Input group</a></li>
+							<li><a href="<?= base_url(); ?>adminpanel/add_changelog" class="sidebar-nav-link">Changelog hozzáadása</a></li>
 							<li><a href="../../pages/input-controls/input-suggestion.html" class="sidebar-nav-link">Input suggestion</a></li>
 							<li><a href="../../pages/input-controls/label.html" class="sidebar-nav-link">Label</a></li>
 							<li><a href="../../pages/input-controls/radio-button.html" class="sidebar-nav-link">Radio button</a></li>
@@ -126,7 +135,8 @@
 						</ul>
 					</li>
 					<?php endif; ?>
-					<li><a href="<?= base_url(); ?>notifications" class="sidebar-nav-link"><i class="icon-bell"></i> Értesítések 	
+                    <li><a href="<?= base_url(); ?>changelog" class="sidebar-nav-link"><i class="icon-wrench"></i> Changelog</a></li>
+					<li><a href="<?= base_url(); ?>notifications" class="sidebar-nav-link"><i class="icon-bell"></i> Értesítések
 						<?php /*if($this->session->userdata('count_notifications') != 0): */?>
 							<span class="count_not"></span>
 						<?php /*endif; */?>
@@ -163,7 +173,7 @@
 							<span class="d-block d-xl-none count_not"></span>
 					<?php /*endif; */?>
 
-					<div class="navbar-brand d-none d-md-block">ModMiners &middot; <?= $title; ?></div>
+                    <div class="navbar-brand d-flex"><section class="d-none d-md-block">ModMiners &middot;&nbsp;</section> <?= $title; ?></div>
 					<?php if($this->session->userdata('logged_in') === true): ?>
 					
 					<?php endif; ?>
@@ -176,121 +186,7 @@
 					</ol>
 				</nav>-->
 
-				<div class="container-fluid">
-
-<!-- Regisztráció sikeres felugró -->
-
-<?php if($this->session->flashdata('user_registered')): ?>
-  <?php echo "<div class='alert-dismissible fade show animated_alert alert alert-success fixed-top col-12 col-lg-8 offset-lg-2' role='alert'>"; ?>
-  <?php echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button>"; ?>
-  <?php echo $this->session->flashdata('user_registered')."</div>"; ?>
-<?php endif; ?>
-
-<!-- Belépés sikeres felugró -->
-
-<?php if($this->session->flashdata('user_logged')): ?>
-  <?php echo "<div class='alert-dismissible fade show animated_alert alert alert-success fixed-top col-12 col-lg-8 offset-lg-2' role='alert'>"; ?>
-  <?php echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button>"; ?>
-  <?php echo $this->session->flashdata('user_logged')."</div>"; ?>
-<?php endif; ?>
-
-<!-- Belépés sikertelen felugró -->
-
-<?php if($this->session->flashdata('login_failed')): ?>
-  <?php echo "<div class='alert-dismissible fade show animated_alert alert alert-danger fixed-top col-12 col-lg-8 offset-lg-2' role='alert'>"; ?>
-  <?php echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button>"; ?>
-  <?php echo $this->session->flashdata('login_failed')."</div>"; ?>
-<?php endif; ?>
-
-<!-- Kijelentkezés felugró -->
-
-<?php if($this->session->flashdata('user_logout')): ?>
-  <?php echo "<div class='alert-dismissible fade show animated_alert alert alert-success fixed-top col-12 col-lg-8 offset-lg-2' role='alert'>"; ?>
-  <?php echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button>"; ?>
-  <?php echo $this->session->flashdata('user_logout')."</div>"; ?>
-<?php endif; ?>
-
-<!-- Profil beállítások mentése felugró -->
-
-<?php if($this->session->flashdata('update_profile')): ?>
-  <?php echo "<div class='alert-dismissible fade show animated_alert alert alert-success fixed-top col-12 col-lg-8 offset-lg-2' role='alert'>"; ?>
-  <?php echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button>"; ?>
-  <?php echo $this->session->flashdata('update_profile')."</div>"; ?>
-<?php endif; ?>
-
-<!-- ADMINPANEL - user mentésének feulgró ablakja -->
-
-<?php if($this->session->flashdata('user_updated')): ?>
-  <?php echo "<div class='alert-dismissible fade show animated_alert alert alert-success fixed-top col-12 col-lg-8 offset-lg-2' role='alert'>"; ?>
-  <?php echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button>"; ?>
-  <?php echo $this->session->flashdata('user_updated')."</div>"; ?>
-<?php endif; ?>
-
-<!-- DEVMODE -->
-
-<?php if($this->session->flashdata('dev_mode')): ?>
-  <?php echo "<div class='alert-dismissible fade show animated_alert alert alert-warning fixed-top col-12 col-lg-8 offset-lg-2' role='alert'>"; ?>
-  <?php echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button>"; ?>
-  <?php echo $this->session->flashdata('dev_mode')."</div>"; ?>
-<?php endif; ?>
-
-<!-- ÉRTESÍTÁSEK -->
-
-<?php if($this->session->flashdata('mark_all_notification')): ?>
-  <?php echo "<div class='alert-dismissible fade show animated_alert alert alert-info fixed-top col-12 col-lg-8 offset-lg-2' role='alert'>"; ?>
-  <?php echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button>"; ?>
-  <?php echo $this->session->flashdata('mark_all_notification')."</div>"; ?>
-<?php endif; ?>
-
-<!-- BETA ACC -->
-
-<?php if($this->session->flashdata('create_beta_errors')): ?>
-  <?php echo "<div class='alert-dismissible fade show animated_alert alert alert-danger fixed-top col-12 col-lg-8 offset-lg-2' role='alert'>"; ?>
-  <?php echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button>"; ?>
-  <?php echo $this->session->flashdata('create_beta_errors')."</div>"; ?>
-<?php endif; ?>
-
-<?php if($this->session->flashdata('create_beta_success')): ?>
-  <?php echo "<div class='alert-dismissible fade show animated_alert alert alert-success fixed-top col-12 col-lg-8 offset-lg-2' role='alert'>"; ?>
-  <?php echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button>"; ?>
-  <?php echo $this->session->flashdata('create_beta_success')."</div>"; ?>
-<?php endif; ?>
-
-<?php if($this->session->flashdata('delete_beta_success')): ?>
-  <?php echo "<div class='alert-dismissible fade show animated_alert alert alert-success fixed-top col-12 col-lg-8 offset-lg-2' role='alert'>"; ?>
-  <?php echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button>"; ?>
-  <?php echo $this->session->flashdata('delete_beta_success')."</div>"; ?>
-<?php endif; ?>
-
-<?php if($this->session->flashdata('delete_beta_error')): ?>
-  <?php echo "<div class='alert-dismissible fade show animated_alert alert alert-danger fixed-top col-12 col-lg-8 offset-lg-2' role='alert'>"; ?>
-  <?php echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button>"; ?>
-  <?php echo $this->session->flashdata('delete_beta_success')."</div>"; ?>
-<?php endif; ?>
+				<div class="container-fluid p-0">
 
 <!-- All form validation errors are showing in this popup, by adding only the 'form_errors' id, into the $this->popup->set_poup() function -->
 
@@ -331,5 +227,10 @@
   </button>"; ?>
   <?php echo $this->session->flashdata('info')."</div>"; ?>
 <?php endif; ?>
+
+<!-- COPIED MESSAGE -->
+<div class='fade animated_alert alert alert-dark fixed-bottom col-4 offset-4 col-lg-2 offset-lg-5 text-center' id="copied" role='alert' >Másolva!
+</div>
+
 
 

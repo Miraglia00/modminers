@@ -40,6 +40,27 @@
             }
         }
 
+        public function delete($table, $id) {
+            if(!$this->permissions->isLogged()) {
+                return $this->output->set_output(json_encode(array('response_code' => '403', 'message' => 'Forbidden')));
+            }
+            $headers = $this->input->request_headers();
+            if(!isset($headers['token'])) {
+                return $this->output->set_output(json_encode(array('response_code' => '417', 'message' => 'Expectation Failed')));
+            }
+            if($id == NULL) {
+                return $this->output->set_output(json_encode(array('response_code' => '405', 'message' => 'Method Not Allowed')));
+            }
+
+            $delete = $this->site_model->delete($table,$id);
+            if($delete) {
+                return $this->output->set_output(json_encode(array('response_code' => '200', 'message' => 'OK')));
+            }else{
+                return $this->output->set_output(json_encode(array('response_code' => '500', 'message' => 'Internal Server Error')));
+            }
+
+        }
+
         public function check_signature($random) {
             $data = $this->site_model->select('users', array('id' => $this->session->userdata('user_id')));
             $user_code = $data['code'];

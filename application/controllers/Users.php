@@ -495,4 +495,22 @@
 			}
 		}
 
+        public function changelog() {
+            if(!$this->permissions->isLogged()) {
+                redirect('');
+            }
+
+            $data['user_notifications'] =  $this->notification_model->get_all_user_notifications($this->session->userdata('user_id'));
+            $header['permissions'] = $this->permissions->get_permissions();
+            $header["title"] = "Changelog";
+
+            $data['changes'] = $this->site_model->getAll('changelog', 'c_date DESC');
+
+            $this->load->view('templates/header',$header);
+
+            $this->load->view('users/changelog', $data);
+
+            $this->load->view('templates/footer');
+        }
+
 	}

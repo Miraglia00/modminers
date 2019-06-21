@@ -46,7 +46,7 @@
 			</div>
 
 		<div class="row">
-			<div class="col-12">
+			<div class="col-12 d-flex justify-content-around">
 				<button type="submit" name="action" value="update" class="btn btn-secondary btn-lg mt-4 ">Mentés!</button><button name="action" value="delete_beta" type="submit" class="ml-5 btn btn-danger btn-lg mt-4 ">Törlés!</button>
 			</div>
 		</div>
