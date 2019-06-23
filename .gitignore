@@ -11,6 +11,8 @@ application/logs/*
 application/*/config.php
 application/config/
 
+launcherFiles/
+
 composer.lock
 
 user_guide_src/build/*
