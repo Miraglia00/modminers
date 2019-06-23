@@ -137,10 +137,12 @@
 							redirect('');
 						}
 
+						//A DevelopmentMode library is tartalmaz ilyen korlátozást
 						if($_SERVER['CI_ENV'] == "development" && $get_user_data['web_permission'] == 0) {
 							$this->popup->set_popup('warning', 'Az oldal jelenleg fejlesztés alatt áll így a regisztráció nem elérhető!');
 							redirect('');
 						}
+
                         $unique = substr(base64_encode(mt_rand()), 0, 15);
 						$user_data = array(
 							'user_id' => $user_id,
@@ -151,6 +153,7 @@
 							'p_ser' => $get_user_data['server_permission'],
                             'generated' => $unique
 						);
+
 
 						$this->session->set_userdata($user_data);
 
@@ -504,7 +507,7 @@
             $header['permissions'] = $this->permissions->get_permissions();
             $header["title"] = "Changelog";
 
-            $data['changes'] = $this->site_model->getAll('changelog', 'c_date DESC');
+            $data['changes'] = $this->site_model->getAll('changelog', 'c_date DESC, id DESC');
 
             $this->load->view('templates/header',$header);
 

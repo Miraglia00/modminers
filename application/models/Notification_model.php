@@ -92,7 +92,7 @@ class Notification_model extends CI_model {
 
 	public function get_admins_id() {
 
-		$query = $this->db->select('id')->from('users')->where("web_permission > 1")->get();
+		$query = $this->db->select('id')->from('users')->where("web_permission > 0")->get();
 		$x = 0;
 		foreach ($query->result() as $row):
 			$admins[$x++] = $row->id;
