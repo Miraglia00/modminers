@@ -28,7 +28,7 @@ class Admin extends CI_Controller {
 			$x++;
 		}
 
-		$header["title"] = "Adminpanel - Játékos lista";
+		$header["title"] = "<span class='d-none d-lg-block'>Adminpanel -</span> Játékos lista";
 
 		$header['permissions'] = $this->permissions->get_permissions();
 
@@ -88,7 +88,7 @@ class Admin extends CI_Controller {
 				redirect('adminpanel/show/all');
 			}
 
-			$header['title'] = "Adminpanel - ".$data['edit_data']['username']." módosítása";
+			$header['title'] = "<span class='d-none d-lg-block'>Adminpanel -</span> ".$data['edit_data']['username']." módosítása";
 			$header['permissions'] = $this->permissions->get_permissions();
 			$header['user_notifications'] = $this->notifications->get_user_notifications($this->session->userdata('user_id'));
 			
@@ -251,7 +251,7 @@ class Admin extends CI_Controller {
 			redirect('');
 		}
 
-		$header['title'] = "Adminpanel - Weboldal beállítások";
+		$header['title'] = "<span class='d-none d-lg-block'>Adminpanel -</span> Weboldal beállítások";
 		$header['permissions'] = $this->permissions->get_permissions();
 		$header['user_notifications'] = $this->notifications->get_user_notifications($this->session->userdata('user_id'));
 
@@ -316,7 +316,7 @@ class Admin extends CI_Controller {
 
 		}else if($id === "all") {
 
-			$header["title"] = "Adminpanel - Beta felhasználók";
+			$header["title"] = "<span class='d-none d-lg-block'>Adminpanel -</span> Beta felhasználók";
 
 			$header['permissions'] = $this->permissions->get_permissions();
 
@@ -354,7 +354,7 @@ class Admin extends CI_Controller {
 
 		}
 
-		$header["title"] = "Adminpanel - Beta felhasználó létrehozása";
+		$header["title"] = "<span class='d-none d-lg-block'>Adminpanel -</span> Beta felhasználó létrehozása";
 
 		$header['permissions'] = $this->permissions->get_permissions();
 
@@ -373,7 +373,7 @@ class Admin extends CI_Controller {
 			redirect('');
 		}
 
-		$header["title"] = "Adminpanel - Játékos regisztrációk";
+		$header["title"] = "<span class='d-none d-lg-block'>Adminpanel -</span> Játékos regisztrációk";
 
 		$header['permissions'] = $this->permissions->get_permissions();
 
@@ -458,7 +458,7 @@ class Admin extends CI_Controller {
 
 		}
 
-		$header["title"] = "Adminpanel - Hír létrehozása";
+		$header["title"] = "<span class='d-none d-lg-block'>Adminpanel -</span> Hír létrehozása";
 
 		$header['permissions'] = $this->permissions->get_permissions();
 
@@ -507,7 +507,7 @@ class Admin extends CI_Controller {
 
         $data['post'] = $this->site_model->select('post', array('id' => $id));
 
-        $header["title"] = "Adminpanel - Hír szerkesztése";
+        $header["title"] = "<span class='d-none d-lg-block'>Adminpanel </span> -Hír szerkesztése";
 
         $header['permissions'] = $this->permissions->get_permissions();
 

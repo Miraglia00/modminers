@@ -30,7 +30,7 @@
 
         </div>
 
-        <div class="container-fluid mt-3">
+        <div class="container-fluid mt-3 d-none d-md-block">
             <div class="row">
                 <div class="col-4">
                     <button class="d-flex justify-content-center btn btn-success w-100" type="submit"">Mentés</button>
