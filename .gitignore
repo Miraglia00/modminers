@@ -12,6 +12,9 @@ application/logs/*
 !.htaccess
 application/config/*
 
+launcherFiles/*
+launcherFiles/
+
 
 composer.lock
 
