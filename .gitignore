@@ -9,12 +9,11 @@ application/logs/*
 !application/logs/index.html
 
 !application/*/.htaccess
-!.htaccess
-application/config/*
 
-launcherFiles/*
+application/*/config.php
+application/config/
+
 launcherFiles/
-
 
 composer.lock
 
