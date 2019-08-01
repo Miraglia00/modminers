@@ -57,6 +57,7 @@ $route['notifications'] = 'users/notifications';
 $route['notifications/(:any)'] = 'users/notifications/$1';
 $route['login'] = 'users/login';
 $route['changelog'] = 'users/changelog';
+$route['roadmap'] = 'users/roadmap';
 
 $route['adminpanel/edit/(:any)/(:any)'] = "admin/edit/$1/$2";
 $route['adminpanel/update/(:any)/(:any)'] = "admin/update/$1/$2";
