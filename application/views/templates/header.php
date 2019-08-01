@@ -3,10 +3,11 @@
 
     function getResponse() {
         clearInterval(start);
-
+		var a = [1,2,3];
         var req = new XMLHttpRequest();
-        req.open('GET', '<?= $this->auth->siteURL(); ?>api/get/notification_count');
-        req.send();
+        req.open('GET', '<?= $this->auth->siteURL(); ?>api/get/');
+		req.setRequestHeader( "Content-Type", "application/json" );
+        req.send(JSON.stringify(a));
 
         req.onload = function(){
             var data = JSON.parse(req.responseText);

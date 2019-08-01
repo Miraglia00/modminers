@@ -12,17 +12,22 @@
             parent::__construct(); /*&& $this->uri->segment(2) === NULL*/
         }
 
-        public function get($what) {
+
+        public function get($what = NULL) {
             if(!$this->permissions->isLogged()) {
                 return $this->output->set_output(json_encode(array('response_code' => '403', 'message' => 'Forbidden')));
             }
-            /*$headers = $this->input->request_headers();
+			error_reporting(0);
+            $data = file_get_contents( "php://input" );
+			$data = json_decode( $data ); var_dump($data); die();
             if(!isset($headers['token'])) {
                 return $this->output->set_output(json_encode(array('response_code' => '417', 'message' => 'Expectation Failed')));
-            }*/
-            if($what == NULL) {
+            }else{
+				return $this->output->set_output(json_encode($headers['token']));
+			}
+            /*if($what == NULL) {
                 return $this->output->set_output(json_encode(array('response_code' => '405', 'message' => 'Method Not Allowed')));
-            }
+            }*/
 
             $signature = $this->check_signature($this->session->userdata('generated'));
             if($signature) {
