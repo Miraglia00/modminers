@@ -515,5 +515,22 @@
 
             $this->load->view('templates/footer');
         }
+		
+		public function roadmap() {
+            if(!$this->permissions->isLogged()) {
+                redirect('');
+            }
+
+            $data['user_notifications'] =  $this->notification_model->get_all_user_notifications($this->session->userdata('user_id'));
+            $header['permissions'] = $this->permissions->get_permissions();
+            $header["title"] = "Roadmap";
+
+
+            $this->load->view('templates/header',$header);
+
+            $this->load->view('users/roadmap', $data);
+
+            $this->load->view('templates/footer');
+        }
 
 	}

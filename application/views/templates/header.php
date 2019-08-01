@@ -135,6 +135,7 @@
 					</li>
 					<?php endif; ?>
                     <li><a href="<?= base_url(); ?>changelog" class="sidebar-nav-link"><i class="icon-wrench"></i> Changelog</a></li>
+					<li><a href="<?= base_url(); ?>roadmap" class="sidebar-nav-link"><i class="icon-map"></i> Roadmap</a></li>
 					<li><a href="<?= base_url(); ?>notifications" class="sidebar-nav-link"><i class="icon-bell"></i> Értesítések
 						<?php /*if($this->session->userdata('count_notifications') != 0): */?>
 							<span class="count_not"></span>
