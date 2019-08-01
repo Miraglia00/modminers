@@ -16,10 +16,10 @@
             if(!$this->permissions->isLogged()) {
                 return $this->output->set_output(json_encode(array('response_code' => '403', 'message' => 'Forbidden')));
             }
-            $headers = $this->input->request_headers();
+            /*$headers = $this->input->request_headers();
             if(!isset($headers['token'])) {
                 return $this->output->set_output(json_encode(array('response_code' => '417', 'message' => 'Expectation Failed')));
-            }
+            }*/
             if($what == NULL) {
                 return $this->output->set_output(json_encode(array('response_code' => '405', 'message' => 'Method Not Allowed')));
             }
