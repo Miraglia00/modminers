@@ -13,21 +13,21 @@
         }
 
 
-        public function get($what = NULL) {
+        public function get($what) {
             if(!$this->permissions->isLogged()) {
                 return $this->output->set_output(json_encode(array('response_code' => '403', 'message' => 'Forbidden')));
             }
-			error_reporting(0);
+			/*error_reporting(0);
             $data = file_get_contents( "php://input" );
-			$data = json_decode( $data ); var_dump($data); die();
-            if(!isset($headers['token'])) {
+			$data = json_decode( $data ); var_dump($data); die();*/
+            /*if(!isset($headers['token'])) {
                 return $this->output->set_output(json_encode(array('response_code' => '417', 'message' => 'Expectation Failed')));
             }else{
 				return $this->output->set_output(json_encode($headers['token']));
-			}
-            /*if($what == NULL) {
+			}*/
+            if($what == NULL) {
                 return $this->output->set_output(json_encode(array('response_code' => '405', 'message' => 'Method Not Allowed')));
-            }*/
+            }
 
             $signature = $this->check_signature($this->session->userdata('generated'));
             if($signature) {
