@@ -12,14 +12,19 @@
             parent::__construct(); /*&& $this->uri->segment(2) === NULL*/
         }
 
+
         public function get($what) {
             if(!$this->permissions->isLogged()) {
                 return $this->output->set_output(json_encode(array('response_code' => '403', 'message' => 'Forbidden')));
             }
-            /*$headers = $this->input->request_headers();
-            if(!isset($headers['token'])) {
+			/*error_reporting(0);
+            $data = file_get_contents( "php://input" );
+			$data = json_decode( $data ); var_dump($data); die();*/
+            /*if(!isset($headers['token'])) {
                 return $this->output->set_output(json_encode(array('response_code' => '417', 'message' => 'Expectation Failed')));
-            }*/
+            }else{
+				return $this->output->set_output(json_encode($headers['token']));
+			}*/
             if($what == NULL) {
                 return $this->output->set_output(json_encode(array('response_code' => '405', 'message' => 'Method Not Allowed')));
             }

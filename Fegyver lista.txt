@@ -1,0 +1,25 @@
+Név - Tár - Lõszer
+---------------------------------------------------------------------------------------------------
+Mk17 - 		30rnd .300 AAC Blackout - 					.300 AAC Blackout
+Ak47 - 		30rnd 7.62x39mm | 75rnd 7.62x39mm DRUM - 			7.62x39mm
+HK G36C - 	30rnd 5.56x45mm NATO (Type3) | 100rnd 5.56x45mm NATO DRUM - 	5.56x45mm NATO
+M416 - 		30rnd 5.56x45mm NATO | 100rnd 5.56x45mm NATO DRUM - 		5.56x45mm NATO
+---------------------------------------------------------------------------------------------------
+M9-Beretta - 	15rnd 9mm - 							9mm
+Makarov PM - 	10rnd 9mm - 							9mm
+HK USP .45 - 	10rnd .45 ACP - 						.45 ACP
+Glock 18-C - 	20rnd 9mm - 							9mm
+MAC-10 - 	26rnd .45 ACP - 						.45 ACP
+Desert Eagle - 	7rnd .50 AE - 							.50 AE
+Luger P08 - 	8rnd 7.62x21mm - 						7.62.21mm
+M1911 - 	10rnd .45 ACP - 						.45 ACP
+----------------------------------------------------------------------------------------------------
+HK MP5 - 	25rnd 9mm - 							9mm
+FN P90 - 	50rnd 5.7x28mm - 						5.7x28mm
+----------------------------------------------------------------------------------------------------
+Dragunov SVD - 	11rnd 7.62x54mm - 						7.62x54mm
+SV-98 - 	10rnd 7.62x54mm - 						7.62x54mm
+Barett M107 - 	10rnd .50 BMG (Type2) - 					.50 BMG
+M14 DMR - 	21rnd 7.62x51mm NATO - 						7.62x51mm NATO
+ 
+

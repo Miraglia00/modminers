@@ -3,9 +3,9 @@
 
     function getResponse() {
         clearInterval(start);
-
         var req = new XMLHttpRequest();
         req.open('GET', '<?= $this->auth->siteURL(); ?>api/get/notification_count');
+		req.setRequestHeader( "Content-Type", "application/json" );
         req.send();
 
         req.onload = function(){
