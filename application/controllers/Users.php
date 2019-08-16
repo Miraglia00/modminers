@@ -158,6 +158,7 @@
 						$this->session->set_userdata($user_data);
 
                         $signature = $this->auth->set_sign($this->session->userdata('generated'));
+                        $this->site_model->delete('api_tokens', 'ip', $this->input->ip_address());
                         $req = $this->site_model->insert('api_tokens', array('id' => '', 'token' => $signature, 'ip' => $this->input->ip_address()));
                         if($req) {
                             $this->popup->set_popup('success', 'Sikeres belépés', 'Üdvözöllek '.$this->input->post('username').'!');

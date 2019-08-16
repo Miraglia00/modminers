@@ -39,9 +39,7 @@
 				<div class="form-group mt-2">
 					<div class="form-group">
                         <textarea id="edi" name="post_content" ></textarea>
-                        <script>
-                            CKEDITOR.replace('post_content');
-                        </script>
+
 						</div>
 					</div>
 				</div>
@@ -56,3 +54,7 @@
 	</div>	
 </div>
 <?php echo form_close(); ?>
+
+<script>
+    new FroalaEditor('#edi');
+</script>
