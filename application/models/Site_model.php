@@ -53,8 +53,8 @@
                 }
         }
 
-        function delete($table, $id) {
-            $this->db->where('id', $id);
+        function delete($table, $col, $id) {
+            $this->db->where($col, $id);
             $q = $this->db->delete($table);
 
             if($q) {

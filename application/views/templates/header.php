@@ -14,7 +14,7 @@
                 console.log(data.message);
                 clearInterval(interval);
             }else{
-                var number = data.data.number;
+                var number = data.number;
                 if(number != 0) {
                     $('.count_not').html("&nbsp;<span class='badge badge-pill badge-danger'>" +  number + "</span>");
                 }
@@ -57,6 +57,10 @@
 	<link href="<?= base_url(); ?>/assets/css/custom.css" rel="stylesheet">
 	<!-- FONTAWESOME -->
 	<script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+
+    <!-- Text Editor -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 
 	<?php if($_SERVER['CI_ENV'] === "production"): ?>
 		<script src="<?= base_url(); ?>/assets/js/not_allow.js"></script>

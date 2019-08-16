@@ -530,7 +530,7 @@ class Admin extends CI_Controller {
         $post = $this->site_model->select('post', array('id' => $id));
         $title = $post['title'];
 
-        $q = $this->site_model->delete('post', $id);
+        $q = $this->site_model->delete('post', 'id', $id);
 
         if($q) {
             $this->notifications->add_admin_notification('Egy hír törölve lett!',"<b>".$this->session->userdata('username')."</b> törölt egy hírt a kezdőlapról! (Cím: ".$title.")", 4);
