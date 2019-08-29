@@ -1,6 +1,6 @@
 function load_data(query) {
     $.ajax({
-        url: "http://localhost/modminers_ci3/users/search_user",
+        url: "http://"+document.domain+"/modminers_ci3/users/search_user",
         method: "POST",
         data:{query:query},
         success: function(data) {
