@@ -588,5 +588,55 @@ class Admin extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    public function add_codes() {
+        if(!$this->permissions->isAdmin() || !$this->permissions->isLogged()) {
+            redirect('');
+        }
+
+        $this->form_validation->set_rules('name1', 'név', 'trim');
+        $this->form_validation->set_rules('id1', 'id', 'trim');
+        $this->form_validation->set_rules('meta1', 'meta', 'trim');
+        $this->form_validation->set_rules('amount1', 'mennyiség', 'trim');
+
+        if($this->form_validation->run() === TRUE) {
+            $changes = array();
+            for($i = 1; $i<20; $i++) {
+                if($this->input->post('name'.$i) != NULL && $this->input->post('id'.$i) != NULL && $this->input->post('meta'.$i) != NULL && $this->input->post('amount'.$i) != NULL) {
+                    $changes[] = array('code' => $first = substr(str_shuffle(str_repeat("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ=%", 15)), 0, 15), 'name' => $this->input->post('name'.$i), 'block_id' =>  $this->input->post('id'.$i), 'meta' => $this->input->post('meta'.$i), 'amount' => $this->input->post('amount'.$i));
+                }
+            }
+
+
+            //Default fields must be filled!
+            if($changes[0]['name'] == NULL || $changes[0]['block_id'] == NULL || $changes[0]['meta'] == NULL || $changes[0]['amount'] == NULL) {
+                var_dump($changes); die();
+                $this->popup->set_popup('form_errors', 'Sikertelen mentés!', 'Az alapértelmezett mező nem lehet üres!');
+                redirect('adminpanel/codes');
+            }
+
+            if($this->site_model->insert_multiple('codes', $changes)) {
+                $this->popup->set_popup('success', 'Sikeres mentés!', 'A kód/kódok hozzáadva a listához!');
+                $this->notifications->add_admin_notification("Új létrehozott kód/kódok!","<b>".$this->session->userdata('username')."</b> hozzáadott ".count($changes)." darab kódot! <a style=\"color:black;\" href='".base_url()."adminpanel/codes'> Menjünk oda! <i style=\"font-size:20px\" class=\"fas fa-long-arrow-alt-right\"></i></a>" , 4);
+                redirect('adminpanel/codes');
+            }else{
+                $this->popup->set_popup('form_errors', 'Sikertelen mentés!', 'Váratlan hiba történt! (SQL)');
+                redirect('adminpanel/codes');
+            }
+
+        }
+
+        $data['user_notifications'] =  $this->notification_model->get_all_user_notifications($this->session->userdata('user_id'));
+        $data['codes'] = $this->site_model->getAll('codes');
+
+        $header['permissions'] = $this->permissions->get_permissions();
+        $header["title"] = "Changelog";
+
+        $this->load->view('templates/header',$header);
+
+        $this->load->view('admin/codes', $data);
+
+        $this->load->view('templates/footer');
+    }
+
 }
 ?>

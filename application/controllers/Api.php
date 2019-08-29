@@ -18,8 +18,6 @@
             '450' => array('450', 'Already Has Defined Token')
         );
 
-        protected $has_perm = false;
-
         public function __construct() {
             parent::__construct(); /*&& $this->uri->segment(2) === NULL*/
         }
@@ -35,33 +33,13 @@
 
         public function get($what = null) {
 
-
-            $signature = $this->check_signature($this->session->userdata('generated'));
             $headers = $this->input->request_headers();
 
             if($what == NULL) {
                 return $this->send_response(405); /*return $this->output->set_output(json_encode(array('response_code' => '405', 'message' => 'Method Not Allowed')));*/
             }
 
-            if (!$signature) {
-                if(isset($headers['Token'])) {
-                    if(!$this->defined_token($headers['Token'])) {
-                        return $this->send_response(417);
-                    }else{
-                        $this->has_perm = true;
-                    }
-                }else{
-                    return $this->send_response(403);
-                }
-            }else { //VAN ALÁÍRÁS, WEBEN VAN
-                if (!$this->permissions->isLogged()) {
-                    return $this->send_response(403);
-                } else {
-                    $this->has_perm = true;
-                }
-            }
-
-            if($this->has_perm) {
+            if($this->has_perm()) {
                 switch($what){
                     case 'notification_count':
                         $this->notification_count();
@@ -76,15 +54,47 @@
             }
         }
 
-        public function delete($table, $col, $id) {
-            if(!$this->has_perm) {
+        public function select() {
+            if(!$this->has_perm()) {
                 return $this->send_response(403);
             }
-            if($id == NULL) {
-                return $this->send_response(405);
+
+
+            $data = file_get_contents("php://input");
+            $data = json_decode($data, true);
+
+
+            $select = $this->site_model->select($data['table'], $data['param']);
+            if($select === false) {
+                return $this->output->set_output(json_encode(false));
+            }else{
+                return $this->output->set_output(json_encode($select));
+            }
+        }
+
+        function update() {
+            if(!$this->has_perm()) {
+                return $this->send_response(403);
             }
 
-            $delete = $this->site_model->delete($table, $col, $id);
+            $data = file_get_contents("php://input");
+            $data = json_decode($data, true);
+
+            $q = $this->site_model->update($data['table'], $data['col'], $data['id'], $data['param']);
+            return $this->output->set_output(json_encode($q));
+        }
+
+        public function delete() {
+            if(!$this->has_perm()) {
+                return $this->send_response(403);
+            }
+
+
+            $data = file_get_contents("php://input");
+            $data = json_decode($data, true);
+
+
+            $delete = $this->site_model->delete($data['table'], $data['col'], $data['id']);
             if($delete) {
                 return $this->send_response(200);
             }else{
@@ -155,6 +165,47 @@
                 $this->site_model->insert('api_tokens', array('id' => '', 'token' => $token, 'ip' => $ip));
                 return $this->send_spec_response(array('token' => $token));
             }else return $this->send_response('450', 'defined_token', $this->has_defined_token($ip));
+        }
+
+        public function has_perm() {
+            $signature = $this->check_signature($this->session->userdata('generated'));
+            if (!$signature) {
+                if(isset($headers['Token'])) {
+                    if(!$this->defined_token($headers['Token'])) {
+                        return $this->send_response(417);
+                    }else{
+                        return true;
+                    }
+                }else{
+                    return $this->send_response(403);
+                }
+            }else { //VAN ALÁÍRÁS, WEBEN VAN
+                if (!$this->permissions->isLogged()) {
+                    return $this->send_response(403);
+                } else {
+                    return true;
+                }
+            }
+        }
+
+        public function add_admin_notification() {
+            if(!$this->has_perm()) {
+                return $this->send_response(403);
+            }
+
+
+            $data = file_get_contents("php://input");
+            $data = json_decode($data, true);
+
+            if(isset($data['username'])) {
+                $message = "<b>".$data['username']."</b> ".$data['message'];
+            }else{
+                $message = $data['message'];
+            }
+
+            $this->notifications->add_admin_notification($data['title'], $message, $data['type']);
+
+            return true;
         }
 
     }

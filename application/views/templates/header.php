@@ -5,7 +5,7 @@
         clearInterval(start);
         var req = new XMLHttpRequest();
         req.open('GET', '<?= $this->auth->siteURL(); ?>api/get/notification_count');
-		req.setRequestHeader( "Content-Type", "application/json" );
+        req.setRequestHeader( "Content-Type", "application/json" );
         req.send();
 
         req.onload = function(){
@@ -20,10 +20,8 @@
                 }
             }
         };
-        var interval = setTimeout(getResponse, 30000);
+        var interval = setTimeout(getResponse, 20000);
     }
-
-
 </script>
 
 <!doctype html>
@@ -80,7 +78,7 @@
 	<div class="app">
 
         <!-- LOADING ICON -->
-        <div class="fixed-top d-flex justify-content-end m-1">
+        <div class="fixed-top d-flex justify-content-end m-1" style="z-index:9999;">
             <i style="font-size:50px;" class="fas fa-circle-notch fa-spin hidden loading"></i>
         </div>
 
@@ -105,6 +103,7 @@
 				<ul id="sidebar-nav" class="sidebar-nav">
 					<?php if($this->session->userdata('logged_in') === true): ?>
 					<li class="sidebar-nav-btn"><a href="<?= base_url(); ?>users/my_profile" class="btn btn-block btn-outline-light">Profilom</a></li>
+                    <li class="sidebar-nav-btn"><button type="button" class="btn btn-block btn-outline-light" data-toggle="modal" data-target="#code_modal">Kód beváltás</button></li>
 					<?php endif; ?>
 
 					<li><a href="<?= base_url(); ?>home" class="sidebar-nav-link"><i class="icon-home"></i> Kezdőlap</a></li>
@@ -131,9 +130,8 @@
 							<li><a href="<?= base_url(); ?>adminpanel/registrations" class="sidebar-nav-link">Játékos regisztrációk</a></li>
 							<li><a href="<?= base_url(); ?>adminpanel/beta_accounts/all" class="sidebar-nav-link">Beta felhasználók</a></li>
 							<li><a href="<?= base_url(); ?>adminpanel/add_changelog" class="sidebar-nav-link">Changelog hozzáadása</a></li>
-							<li><a href="../../pages/input-controls/input-suggestion.html" class="sidebar-nav-link">Input suggestion</a></li>
-							<li><a href="../../pages/input-controls/label.html" class="sidebar-nav-link">Label</a></li>
-							<li><a href="../../pages/input-controls/radio-button.html" class="sidebar-nav-link">Radio button</a></li>
+                            <li><a href="<?= base_url(); ?>adminpanel/codes" class="sidebar-nav-link">Kód létrehozása</a></li>
+                            <li><a href="<?= base_url(); ?>adminpanel/api_tokens" class="sidebar-nav-link">API tokens</a></li>
 							<li><a href="<?= base_url(); ?>adminpanel/app_settings" class="sidebar-nav-link">Weboldal beállítások</a></li>
 						</ul>
 					</li>
@@ -235,6 +233,42 @@
 <!-- COPIED MESSAGE -->
 <div class='fade animated_alert alert alert-dark fixed-bottom col-4 offset-4 col-lg-2 offset-lg-5 text-center' id="copied" role='alert' >Másolva!
 </div>
+
+<?php if($this->permissions->isLogged()): ?>
+<div class="modal fade" id="code_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Kód beváltása</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 text-danger medium mb-2 text-center">
+                    Itt betudod váltani a kapott kódot. :)
+                </div>
+                <input id="code" name="code" type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Kód">
+                <div class="col-12 medium mt-2 text-center text-danger hidden" id="error-response">
+                </div>
+                <div class="col-12 medium mt-2 text-center text-success hidden" id="success-response">
+                </div>
+                <div class="col-12 medium mt-2 text-center text-success" id="code-results">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezár</button>
+                <button onclick="confirm_code();" type="button" class="btn btn-primary">Beváltás</button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<script type="text/javascript">
+    var username = "<?= $this->session->userdata('username'); ?>";
+</script>
+<script src="<?= base_url(); ?>/assets/js/codes.js"></script>
+
 
 
 
