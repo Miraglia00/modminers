@@ -34,16 +34,16 @@
 
 				foreach ($q->result_array() as $row) {
 					$data = $row;
-				}
+                }
 
 				return $data;
 			}else{
 				return false;
 			}
 		}
-        function update($table, $id, $array) {
+        function update($table, $col, $id, $array) {
             $this->db->set($array);
-            $this->db->where('id', $id);
+            $this->db->where($col, $id);
             $q =  $this->db->update($table);
 
                 if($q) {

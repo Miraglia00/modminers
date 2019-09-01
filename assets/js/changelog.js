@@ -33,6 +33,8 @@ function add_field() {
 
 function delete_field(id) {
     $("#" + id).remove();
+    x--;
+    $('.field_counter').html(x);
 }
 
 function remove_all() {
@@ -42,4 +44,5 @@ function remove_all() {
         $("#field" + i).remove();
     }
     $('.field_counter').html(1);
+    x=1;
 }
