@@ -33,6 +33,15 @@
 					</div>
 				</div>
 
+                <div class="form-group mt-2">
+                    <label class="control-label">Weboldal verziója:</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" name="app_version" class="form-control" aria-label="Weboldal verzió"  value="<?= $_SERVER['WEB_VERSION']; ?>"/>
+                        </div>
+                    </div>
+                </div>
+
 			</div>
 		</div>
 		<div class="row">
@@ -43,3 +52,4 @@
 	</div>	
 </div>
 <?php echo form_close(); ?>
+

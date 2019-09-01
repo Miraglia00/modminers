@@ -7,3 +7,4 @@ RewriteRule ^(.*)$ ./index.php/$1 [L]
 Options -Indexes
 
 SetEnv CI_ENV development
+SetEnv WEB_VERSION 1.0

@@ -82,6 +82,11 @@
             <i style="font-size:50px;" class="fas fa-circle-notch fa-spin hidden loading"></i>
         </div>
 
+        <!-- VERSION -->
+        <div class="fixed-bottom d-flex justify-content-end m-1 small" style="z-index:9999;">
+           Verzió:<?= $_SERVER['WEB_VERSION']; ?><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+        </div>
+
 		<div class="app-body">
 			<div class="app-sidebar bg-primary">
 				<div class="text-right">
@@ -150,8 +155,8 @@
 				</ul>
 				<?php if($this->session->userdata('logged_in') == true): ?>
 				<div class="sidebar-footer">
-					<a href="../../pages/content/chat.html" data-toggle="tooltip" title="Chats"><i class="icon-bubbles"></i> </a>
-					<a href="../../pages/content/settings.html" data-toggle="tooltip" title="Beállítások (Hamarosan)"><i class="icon-settings"></i> </a>
+					<a href="" data-toggle="tooltip" title="Chats"><i class="icon-bubbles"></i> </a>
+					<a href="" data-toggle="tooltip" title="Beállítások (Hamarosan)"><i class="icon-settings"></i> </a>
 					<a href="<?= base_url(); ?>user/logout" data-toggle="tooltip" title="Kijelentkezés"><i class="fas fa-sign-out-alt"></i></a>
 				</div>
 				<?php endif; ?>
