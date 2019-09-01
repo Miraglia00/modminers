@@ -256,6 +256,7 @@ class Admin extends CI_Controller {
 		$header['user_notifications'] = $this->notifications->get_user_notifications($this->session->userdata('user_id'));
 
 		$this->form_validation->set_rules('dev_mode', 'státusz', 'required');
+        $this->form_validation->set_rules('app_version', 'verzió', 'required');
 
 		if($this->form_validation->run() === TRUE) {
 			switch ($this->input->post('dev_mode')) {
@@ -274,6 +275,10 @@ class Admin extends CI_Controller {
 					break;
 			}
 
+            $old_version = $_SERVER['WEB_VERSION'];
+
+			$version = $this->input->post('app_version');
+
 			$old_mode = $_SERVER['CI_ENV'];
 
 			$new_mode = $dev_mode;
@@ -282,11 +287,11 @@ class Admin extends CI_Controller {
 
 			$str = file_get_contents($file);
 
-			$str = str_replace("$old_mode", "$new_mode",$str);
+			$str = str_replace(array("$old_mode", "$old_version"), array("$new_mode", "$version"), $str);
 
 			file_put_contents('.htaccess', $str);
 
-			$this->notifications->add_admin_notification('Weboldal beállítása változott!', '<b>'.$this->session->userdata('username').'</b> átállította a weboldal státuszát! ('.$old_mode.' -> '.$new_mode.')', 4);
+			$this->notifications->add_admin_notification('Weboldal beállítása változott!', '<b>'.$this->session->userdata('username').'</b> átállította a weboldal beállításait! (Státusz: '.$old_mode.' -> '.$new_mode.' | Verzió: '.$version.')', 4);
 
 			redirect('adminpanel/app_settings');
 
