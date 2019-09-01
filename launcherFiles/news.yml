@@ -1,28 +1,18 @@
-1.0.5 [2019.06.01]
-+EnderIO hozzáadva
-+Lucky-Block hozzáadva
-+Draconic-Evolution hozáadva
-+TreeCapitator hozzáadva
--ProjectE eltávolítva
-
-1.0.4 [2019.05.22]
--ModMiners mod pillanatnyilag 
- eltávolítva
-
-1.0.3 [2019.05.12]
--Felírt modok eltávolítva
--Saját MOD hozzáadva
-|LISTA HAMAROSAN...|
-
-1.0.2 [2019.04.03]
-!Teljes modpack cserélve!
-Státusz: ALPHA!
-
-1.0.1 [2019.03.31]
--OpenBlock eltávolítva
--ExtraUtils2 eltávolítva
--Morph eltávolítva
--MysticalAgriculture eltávolítva
--PortalGun eltávolítva
-+Biomes O Plenty hozzáadva
-+Mo' Creatures hozzáadva
+ 1.0.2 [2019.08.29]
+ -HUD rendszer pillanatnyilag deaktiválva
+ !Zombi spawnolási rendszer módosítva
+ Figyelem: Csak tesztelésre! Hibák tömkelege fordulhat elő..
+ 
+ 1.0.1 [2019.08.27]
+ !Fa lombkorona hibák kijavítva
+ !Zombi spawnolási rendszer módosítva
+ !Halál utáni zombi dobás javítva
+ !Kreatív módban történő szomjazás, fáradás megszűntetve
+ !HUD problémák javítva
+ +Szomjazás / fáradtság általi halál üzenetek hozzáadva
+ Figyelem: Csak tesztelésre! Hibák tömkelege fordulhat elő..
+ 
+ 1.0.0 [2019.08.23]
+ Első public Alpha! 
+ Bent lévő mod: || Apocalipty ||
+ Figyelem: Csak tesztelésre! Hibák tömkelege fordulhat elő..
