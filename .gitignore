@@ -12,6 +12,7 @@ application/*/config.php
 application/config/
 
 launcherFiles/
+launcherFiles/*
 
 composer.lock
 
