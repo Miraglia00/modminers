@@ -82,7 +82,7 @@ function confirm_code() {
     if(document.domain === "localhost") {
         var target = "http://"+document.domain+"/"+location.pathname.split('/')[1]+"/api/select";
     }else{
-        var target = "http://"+document.domain+"/api/delete";
+        var target = "http://"+document.domain+"/api/select";
     }
     var table = "codes";
 
@@ -93,92 +93,100 @@ function confirm_code() {
         }
     };
 
-    const jsonstring = JSON.stringify(params);
-    const http = new XMLHttpRequest();
-    http.open("POST", target);
-    http.setRequestHeader( "Content-Type", "application/json");
-    loading();
-    http.send(jsonstring);
-    var data = "";
-    http.onload = function() {
-        data = JSON.parse(http.responseText);
-        http.abort();
+    if(code === "" || code === NULL) {
+        $('#error-response').html('Ez a kód nem létezik!');
+        $('#error-response').show();
+        setTimeout(function () {
+            $('#error-response').hide('blind');
+        }, 5000)
+    }else{
+        const jsonstring = JSON.stringify(params);
+        const http = new XMLHttpRequest();
+        http.open("POST", target);
+        http.setRequestHeader( "Content-Type", "application/json");
         loading();
+        http.send(jsonstring);
+        var data = "";
+        http.onload = function() {
+            data = JSON.parse(http.responseText);
+            http.abort();
+            loading();
 
-        if(data === false) {
-            if(data.used_by != "") {
-                $('#error-response').html('Ez a kód nem létezik!');
-                $('#error-response').show();
-                setTimeout(function () {
-                    $('#error-response').hide('blind');
-                }, 5000)
-            }
-        }else{
-            if(data.used_by == "") {
-                loading();
-                var table = "codes";
-                var col = "code";
-                const params = {
-                    table,
-                    col,
-                    id:code,
-                    param : param= {
-                        used_by:username
-                    }
-                };
-
-                const jsonstring = JSON.stringify(params);
-
-                if(document.domain === "localhost") {
-                    var target = "http://"+document.domain+"/"+location.pathname.split('/')[1]+"/api/update";
-                }else{
-                    var target = "http://"+document.domain+"/api/update";
-                }
-
-                http.open("POST", target);
-                http.setRequestHeader( "Content-Type", "application/json");
-                http.send(jsonstring);
-
-                http.onload = function() {
-                    $('#success-response').html('Sikeres aktiválás!');
-                    $('#success-response').show();
-                    setTimeout(function() {
-                        $('#success-response').hide('blind');
+            if(data === false) {
+                if(data.used_by != "") {
+                    $('#error-response').html('Ez a kód nem létezik!');
+                    $('#error-response').show();
+                    setTimeout(function () {
+                        $('#error-response').hide('blind');
                     }, 5000)
-
-                    $('#code-results').html("Ezt kaptad: '"+data.name+"', és ennyi mennyiségben: '"+data.amount+"'");
-                    http.abort();
-
+                }
+            }else{
+                if(data.used_by == "") {
+                    loading();
+                    var table = "codes";
+                    var col = "code";
                     const params = {
-                        title: "Kód aktiválás!",
-                        username: username,
-                        message: "aktiválta a következő kódot. ("+data.code+")",
-                        type: 4
+                        table,
+                        col,
+                        id:code,
+                        param : param= {
+                            used_by:username
+                        }
                     };
 
                     const jsonstring = JSON.stringify(params);
 
                     if(document.domain === "localhost") {
-                        var target = "http://"+document.domain+"/"+location.pathname.split('/')[1]+"/api/add_admin_notification";
+                        var target = "http://"+document.domain+"/"+location.pathname.split('/')[1]+"/api/update";
                     }else{
-                        var target = "http://"+document.domain+"/api/add_admin_notification";
+                        var target = "http://"+document.domain+"/api/update";
                     }
 
                     http.open("POST", target);
                     http.setRequestHeader( "Content-Type", "application/json");
                     http.send(jsonstring);
-                    http.onload = function() {
-                        http.abort();
-                        loading();
-                    }
-                }
-            }else{
 
-                $('#error-response').html('Ez a kód már aktiválva van!');
-                $('#error-response').show();
-                setTimeout(function() {
-                    $('#error-response').hide('blind');
-                }, 5000)
+                    http.onload = function() {
+                        $('#success-response').html('Sikeres aktiválás!');
+                        $('#success-response').show();
+                        setTimeout(function() {
+                            $('#success-response').hide('blind');
+                        }, 5000)
+
+                        $('#code-results').html("Ezt kaptad: '"+data.name+"', és ennyi mennyiségben: '"+data.amount+"'");
+                        http.abort();
+
+                        const params = {
+                            title: "Kód aktiválás!",
+                            username: username,
+                            message: "aktiválta a következő kódot. ("+data.code+")",
+                            type: 4
+                        };
+
+                        const jsonstring = JSON.stringify(params);
+
+                        if(document.domain === "localhost") {
+                            var target = "http://"+document.domain+"/"+location.pathname.split('/')[1]+"/api/add_admin_notification";
+                        }else{
+                            var target = "http://"+document.domain+"/api/add_admin_notification";
+                        }
+
+                        http.open("POST", target);
+                        http.setRequestHeader( "Content-Type", "application/json");
+                        http.send(jsonstring);
+                        http.onload = function() {
+                            http.abort();
+                            loading();
+                        }
+                    }
+                }else{
+
+                    $('#error-response').html('Ez a kód már aktiválva van!');
+                    $('#error-response').show();
+                    setTimeout(function() {
+                        $('#error-response').hide('blind');
+                    }, 5000)
+                }
             }
         }
     }
