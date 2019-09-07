@@ -23,7 +23,6 @@
         var interval = setTimeout(getResponse, 20000);
     }
 </script>
-
 <!doctype html>
 <html lang="hu">
 <head>
@@ -142,6 +141,7 @@
 					&nbsp;&nbsp;&nbsp;
 					<a href="register" data-toggle="tooltip" title="Regisztráció"><i class="fas fa-user-plus"></i> </a>
 				</div>
+
 				<?php endif; ?>
 				<center><span id="result"></span></center>
 
@@ -209,10 +209,6 @@
   </button>"; ?>
   <?php echo $this->session->flashdata('info')."</div>"; ?>
 <?php endif; ?>
-
-<!-- COPIED MESSAGE -->
-<div class='fade animated_alert alert alert-dark fixed-bottom col-4 offset-4 col-lg-2 offset-lg-5 text-center' id="copied" role='alert' >Másolva!
-</div>
 
 <?php if($this->permissions->isLogged()): ?>
 <div class="modal fade" id="code_modal" tabindex="-1" role="dialog" aria-hidden="true">

@@ -43,7 +43,10 @@
         document.execCommand("copy");
         $temp.remove();
 
+        $('#copied').removeClass('hidden');
+
         $('#copied').addClass('show');
+
         setTimeout(function(){
             $('#copied').removeClass('show');
         },1000)

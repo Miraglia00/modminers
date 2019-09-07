@@ -30,6 +30,9 @@ switch($_SERVER['SERVER_NAME']) {
 	case 'modminers.hu':
 		$config['base_url'] = 'http://www.modminers.hu/';
 		break;
+    case '192.168.0.143':
+        $config['base_url'] = 'http://192.168.0.143/modminers';
+        break;
 	default:
 		$config['base_url'] = 'http://www.modminers.hu/';
 		break;

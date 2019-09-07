@@ -18,7 +18,7 @@ class Auth
     function siteURL() {
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
         $domainName = $_SERVER['HTTP_HOST'] . '/';
-        if($domainName == 'localhost/' || $domainName == '192.168.0.45/') {
+        if($domainName == 'localhost/' || $domainName == '192.168.0.143/') {
             return $protocol . $domainName."modminers/";
         }else{
             return $protocol . $domainName;

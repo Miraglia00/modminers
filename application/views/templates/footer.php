@@ -22,6 +22,8 @@
 <div class="fixed-bottom d-flex justify-content-end m-1 small" style="z-index:9999;">
     Verzió:<?= $_SERVER['WEB_VERSION']; ?><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
 </div>
+<!-- COPIED -->
+<div class='fade animated_alert alert alert-dark fixed-bottom col-4 offset-4 col-lg-2 offset-lg-5 text-center hidden' id="copied" role='alert' >Másolva!</div>
 
 
 

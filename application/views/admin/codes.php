@@ -86,14 +86,17 @@
 
     <script>
 
-        function copy(code) {
+        function copy(name, code) {
             var $temp = $("<textarea>");
             $("body").append($temp);
-            $temp.val(code).select();
+            $temp.val(name + ' : ' + code).select();
             document.execCommand("copy");
             $temp.remove();
 
+            $('#copied').removeClass('hidden');
+
             $('#copied').addClass('show');
+
             setTimeout(function(){
                 $('#copied').removeClass('show');
             },1000)
