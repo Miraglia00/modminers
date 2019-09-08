@@ -31,7 +31,7 @@
 									<?php if($user_settings['email'] == 1): ?>
 									<td class="align-middle" style="font-size: 16px;">E-mail:</td><td class="align-middle" style="font-size: 16px;"><?= $user_data['email'] ?></td>
 									<?php else: ?>
-									<td class="align-middle" style="font-size: 16px;">E-mail:</td><td class="align-middle" style="font-size: 16px;">Ismeretlen</td>
+									<td class="align-middle" style="font-size: 16px;">E-mail:</td><td class="align-middle" style="font-size: 16px;"><?= ($this->permissions->isAdmin()) ? $user_data['email'] : "Ismeretlen" ?></td>
 									<?php endif; ?>
 								</tr>
 								<tr>
