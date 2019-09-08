@@ -54,8 +54,8 @@
 	
 				$user_settings = array(
 					'id' => $dbid,
-					'email' => "1",
-					'image' => "1",
+					'email' => "0",
+					'image' => "0",
 				);
 				$this->db->insert('user_settings', $user_settings);
 	

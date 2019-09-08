@@ -28,6 +28,10 @@
 <head>
 <meta http-equiv="content-type" content="text/html"; charset="UTF-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=yes">
+    <meta property="og:title" content="ModMiners"/>
+    <meta property="og:description" content="A ModMiners hivatalos weboldala. Itt mindent megtalálsz ami segítségül szolgálhat a játék elindításához. Ezen felül dokumentációk segítik utadat a játkon belül."/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:image" content="www.modminers.hu/assets/images/webpage_image.png"/>
 	<title>ModMiners</title>
 
 	<!-- template css -->
