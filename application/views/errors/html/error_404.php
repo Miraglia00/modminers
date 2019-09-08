@@ -35,10 +35,10 @@ $homepage = "http://www.modminers.hu";
 <body style="background-color: #e9ecef;">
 	<div class="d-flex align-content-center flex-wrap mt-5" style="color:rgba(255,255,255,0.75);">
 		<div class="jumbotron col-8 offset-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4" style="background-color: #343a40;">
-			<img src="/modminers/assets/images/404.png" style="width:25%;" class="mx-auto d-block" />
+			<img src="http://www.modminers.hu/assets/images/404.png" style="width:25%;" class="mx-auto d-block" />
 			<h1 class="display-4 d-flex justify-content-center flex-wrap">Hoppá!</h1>
 			<hr class="my-4">
-			<p class="big">Elfelejtettél térképet hozni magaddal? Valószínüleg eltévedtél!</p>
+			<p class="big">Elfelejtettél iránytűt hozni magaddal? Valószínüleg eltévedtél!</p>
 			<p class="medium">A keresett oldal nem található!</p>
 			<p class="col-md-6 offset-md-3 col-12" style="background-color: #868e96;">
 			<a class="btn btn-lg" href="<?= $homepage ?>" role="button" style="width:100%;">Kezdőlapra!</a>
